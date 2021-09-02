@@ -4,10 +4,10 @@ namespace FlappyClone
 {
     public class WallData : MonoBehaviour
     {
-        public WallCollider TopCollider;
+        public CollisionTrigger2D TopCollider;
         public SpriteRenderer TopSprite;
-        public WallClearTrigger ClearTrigger;
-        public WallCollider BottomCollider;
+        public CollisionTrigger2D ClearTrigger;
+        public CollisionTrigger2D BottomCollider;
         public SpriteRenderer BottomSprite;
     }
 }

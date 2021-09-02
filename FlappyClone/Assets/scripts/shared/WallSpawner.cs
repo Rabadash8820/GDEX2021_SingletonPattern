@@ -71,14 +71,17 @@ namespace FlappyClone
             wallData.TopSprite.transform.localPosition = (WorldHeight - randOffset) * Vector3.up;
             wallData.TopSprite.size = new Vector2(wallData.TopSprite.size.x, randOffset);
             wallData.TopCollider.Collider.offset = randOffset / 2f * Vector2.up;
-            wallData.TopCollider.Collider.size = new Vector2(wallData.TopCollider.Collider.size.x - offset, randOffset - offset);
+            if (wallData.TopCollider.Collider is BoxCollider2D topBox)
+                topBox.size = new Vector2(topBox.size.x - offset, randOffset - offset);
 
             wallData.ClearTrigger.transform.localPosition = (WorldHeight - randOffset - randHoleHeight / 2f) * Vector3.up;
-            wallData.ClearTrigger.Trigger.size = new Vector2(wallData.ClearTrigger.Trigger.size.x, randHoleHeight);
+            if (wallData.ClearTrigger.Collider is BoxCollider2D clearTrigger)
+                clearTrigger.size = new Vector2(clearTrigger.size.x, randHoleHeight);
 
             wallData.BottomSprite.size = new Vector2(wallData.BottomSprite.size.x, WorldHeight - randOffset - randHoleHeight);
             wallData.BottomCollider.Collider.offset = (WorldHeight - randOffset - randHoleHeight) / 2f * Vector2.up;
-            wallData.BottomCollider.Collider.size = new Vector2(wallData.BottomCollider.Collider.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
+            if (wallData.BottomCollider.Collider is BoxCollider2D bottomBox)
+                bottomBox.size = new Vector2(bottomBox.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
 
             var newEvent = new WallSpawnEvent { WallData = wallData };
             NewWallSpawned?.Invoke(sender: this, newEvent);

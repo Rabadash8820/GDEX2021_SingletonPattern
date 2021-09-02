@@ -24,11 +24,15 @@ namespace FlappyClone
         }
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
-        private void Start()
+        private void Awake()
         {
             this.AssertAssociation(WorldRoot, nameof(WorldRoot));
             this.AssertAssociation(WorldRoot, nameof(GroundSprite));
+        }
 
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
+        private void Start()
+        {
             SpriteRenderer groundClone = Instantiate(GroundSprite, -Mathf.Sign(Speed) * GroundSprite.size.x * Vector2.right, Quaternion.identity, GroundSprite.transform.parent);
             _groundSprite1 = GroundSprite;
             _groundSprite2 = groundClone;

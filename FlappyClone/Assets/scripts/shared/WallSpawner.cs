@@ -49,7 +49,7 @@ namespace FlappyClone
         }
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
-        private void Start()
+        private void Awake()
         {
             this.AssertAssociation(WallPrefab, nameof(WallPrefab));
             this.AssertAssociation(WallParent, nameof(WallParent));

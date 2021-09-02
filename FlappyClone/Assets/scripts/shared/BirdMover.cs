@@ -24,7 +24,7 @@ namespace FlappyClone
         }
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
-        private void Start()
+        private void Awake()
         {
             this.AssertAssociation(BirdRigidbody, nameof(BirdRigidbody));
         }

@@ -293,6 +293,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1386044130}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
+        m_MethodName: set_simulated
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1458671843}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &178206338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1047,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8748944942728873105, guid: 08041de3b6cecbd42b4a246110a8cba6, type: 3}
   m_PrefabInstance: {fileID: 1277514114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1386044130 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5222463752640807669, guid: cf2ae9a920927214fa267d2487bc755a, type: 3}
+  m_PrefabInstance: {fileID: 949386800}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1446010527
 GameObject:

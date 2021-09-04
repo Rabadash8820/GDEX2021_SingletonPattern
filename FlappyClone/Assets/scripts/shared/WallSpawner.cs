@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace FlappyClone
 {
-    public class WallSpawnEvent
-    {
-        public WallData WallData;
-    }
-
     public class WallSpawner : MonoBehaviour
     {
         public const float DefaultSpawnOffset = 0f;
@@ -55,8 +50,8 @@ namespace FlappyClone
             this.AssertAssociation(WallParent, nameof(WallParent));
         }
 
-        public event System.EventHandler<WallSpawnEvent> OldWallDeleted;
-        public event System.EventHandler<WallSpawnEvent> NewWallSpawned;
+        public event System.EventHandler<WallEvent> OldWallDeleted;
+        public event System.EventHandler<WallEvent> NewWallSpawned;
 
         public void Spawn()
         {
@@ -83,12 +78,12 @@ namespace FlappyClone
             if (wallData.BottomCollider.Collider is BoxCollider2D bottomBox)
                 bottomBox.size = new Vector2(bottomBox.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
 
-            var newEvent = new WallSpawnEvent { WallData = wallData };
+            var newEvent = new WallEvent { WallData = wallData };
             NewWallSpawned?.Invoke(sender: this, newEvent);
 
             if (DeleteOldestWallOnSpawn && WallParent.childCount > MaxWalls) {
                 WallData oldestWallData = WallParent.GetChild(0).GetComponentInChildren<WallData>();
-                var oldEvent = new WallSpawnEvent { WallData = oldestWallData };
+                var oldEvent = new WallEvent { WallData = oldestWallData };
                 OldWallDeleted?.Invoke(sender: this, oldEvent);
                 Destroy(oldestWallData.gameObject);
             }

@@ -1,25 +1,19 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace FlappyClone
 {
-    public class ObstacleListener : MonoBehaviour
+    public class ObstacleEventSource : MonoBehaviour
     {
         public const string DefaultPlayerTag= "Player";
-        public const string DefaultClearedWallAnimationState = "Base Layer.wall-clear";
 
         public WallSpawner WallSpawner;
         public CollisionTrigger2D GroundCollisionTrigger;
         public string PlayerTag = DefaultPlayerTag;
 
-        [Header("Wall cleared effects")]
-        public ParticleSystem PlayerParticleSystem;
-        public string ClearedWallAnimationState = DefaultClearedWallAnimationState;
-
-        public UnityEvent PlayerClearedWall = new UnityEvent();
-        public UnityEvent PlayerHitObstacle = new UnityEvent();
-
+        public event EventHandler<WallEvent> PlayerClearedWall;
+        public event EventHandler PlayerHitObstacle;
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Reset()
@@ -27,14 +21,10 @@ namespace FlappyClone
             WallSpawner = null;
             GroundCollisionTrigger = null;
             PlayerTag = DefaultPlayerTag;
-            
-            PlayerParticleSystem = null;
-            ClearedWallAnimationState = DefaultClearedWallAnimationState;
 
-            PlayerClearedWall.RemoveAllListeners();
-            PlayerHitObstacle.RemoveAllListeners();
+            PlayerClearedWall = null;
+            PlayerHitObstacle = null;
         }
-
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Awake()
@@ -56,7 +46,7 @@ namespace FlappyClone
             if (!collision.collider.attachedRigidbody.CompareTag(PlayerTag))
                 return;
 
-            PlayerHitObstacle.Invoke();
+            PlayerHitObstacle?.Invoke(sender: this, EventArgs.Empty);
         }
 
         private void handlePlayerClear(WallData wallData, Collider2D collider)
@@ -64,12 +54,7 @@ namespace FlappyClone
             if (!collider.attachedRigidbody.CompareTag(PlayerTag))
                 return;
 
-            wallData.TopAnimator.Play(ClearedWallAnimationState);
-            wallData.BottomAnimator.Play(ClearedWallAnimationState);
-            if (PlayerParticleSystem != null)
-                PlayerParticleSystem.Play();
-
-            PlayerClearedWall.Invoke();
+            PlayerClearedWall?.Invoke(sender: this, new WallEvent { WallData = wallData });
         }
 
     }

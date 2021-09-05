@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FlappyClone
 {
@@ -12,8 +13,11 @@ namespace FlappyClone
         public CollisionTrigger2D GroundCollisionTrigger;
         public string PlayerTag = DefaultPlayerTag;
 
-        public event EventHandler<WallEventArgs> PlayerClearedWall;
-        public event EventHandler PlayerHitObstacle;
+        public event EventHandler<WallEventArgs> EventPlayerClearedWall;
+        public event EventHandler EventPlayerHitObstacle;
+
+        public UnityEvent PlayerClearedWall = new UnityEvent();
+        public UnityEvent PlayerHitObstacle = new UnityEvent();
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Reset()
@@ -21,6 +25,9 @@ namespace FlappyClone
             WallLifecycleManager = null;
             GroundCollisionTrigger = null;
             PlayerTag = DefaultPlayerTag;
+
+            EventPlayerClearedWall = null;
+            EventPlayerHitObstacle = null;
 
             PlayerClearedWall = null;
             PlayerHitObstacle = null;
@@ -47,7 +54,8 @@ namespace FlappyClone
             if (!collision.collider.attachedRigidbody.CompareTag(PlayerTag))
                 return;
 
-            PlayerHitObstacle?.Invoke(sender: this, EventArgs.Empty);
+            EventPlayerHitObstacle?.Invoke(sender: this, EventArgs.Empty);
+            PlayerHitObstacle.Invoke();
         }
 
         private void handlePlayerClear(WallData wallData, Collider2D collider)
@@ -55,7 +63,8 @@ namespace FlappyClone
             if (!collider.attachedRigidbody.CompareTag(PlayerTag))
                 return;
 
-            PlayerClearedWall?.Invoke(sender: this, new WallEventArgs { WallData = wallData });
+            EventPlayerClearedWall?.Invoke(sender: this, new WallEventArgs { WallData = wallData });
+            PlayerClearedWall.Invoke();
         }
 
     }

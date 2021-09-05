@@ -14,8 +14,6 @@ namespace FlappyClone
         public WorldMover WorldMover;
         public Scorekeeper Scorekeeper;
         public HighScoreManager HighScoreManager;
-        public Rigidbody2D PlayerRigidbody;
-        public GameObject GameoverUiRoot;
 
         [Header("Wall cleared effects")]
         public ParticleSystem PlayerParticleSystem;
@@ -35,9 +33,9 @@ namespace FlappyClone
         {
             this.AssertAssociation(ObstacleEventSource, nameof(ObstacleEventSource));
 
-            ObstacleEventSource.PlayerClearedWall += (sender, e) => handlePlayerClearedWall(e.WallData);
+            ObstacleEventSource.EventPlayerClearedWall += (sender, e) => handlePlayerClearedWall(e.WallData);
 
-            ObstacleEventSource.PlayerHitObstacle += (sender, e) => handlePlayerHitObstacle();
+            ObstacleEventSource.EventPlayerHitObstacle += (sender, e) => handlePlayerHitObstacle();
         }
 
         private void handlePlayerClearedWall(WallData wallData)
@@ -64,12 +62,6 @@ namespace FlappyClone
 
             if (HighScoreManager != null)
                 HighScoreManager.Save();
-
-            if (PlayerRigidbody != null)
-                PlayerRigidbody.simulated = false;
-
-            if (GameoverUiRoot != null)
-                GameoverUiRoot.SetActive(true);
         }
 
 

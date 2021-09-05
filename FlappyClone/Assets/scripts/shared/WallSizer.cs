@@ -34,7 +34,7 @@ namespace FlappyClone
             wallData.TopSprite.size = new Vector2(wallData.TopSprite.size.x, randOffset);
             wallData.TopCollider.Collider.offset = randOffset / 2f * Vector2.up;
             if (wallData.TopCollider.Collider is BoxCollider2D topBox)
-                topBox.size = new Vector2(topBox.size.x - offset, randOffset - offset);
+                topBox.size = new Vector2(wallData.TopSprite.size.x - offset, randOffset - offset);
 
             wallData.ClearTrigger.transform.localPosition = (WorldHeight - randOffset - randHoleHeight / 2f) * Vector3.up;
             if (wallData.ClearTrigger.Collider is BoxCollider2D clearTrigger)
@@ -43,7 +43,7 @@ namespace FlappyClone
             wallData.BottomSprite.size = new Vector2(wallData.BottomSprite.size.x, WorldHeight - randOffset - randHoleHeight);
             wallData.BottomCollider.Collider.offset = (WorldHeight - randOffset - randHoleHeight) / 2f * Vector2.up;
             if (wallData.BottomCollider.Collider is BoxCollider2D bottomBox)
-                bottomBox.size = new Vector2(bottomBox.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
+                bottomBox.size = new Vector2(wallData.BottomSprite.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
         }
     }
 }

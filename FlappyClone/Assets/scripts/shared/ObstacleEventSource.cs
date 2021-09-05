@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.Events;
@@ -63,6 +63,7 @@ namespace FlappyClone
             if (!collider.attachedRigidbody.CompareTag(PlayerTag))
                 return;
 
+            Debug.Log($"Wall '{wallData.gameObject.name}' cleared in frame {Time.frameCount}");
             EventPlayerClearedWall?.Invoke(sender: this, new WallEventArgs { WallData = wallData });
             PlayerClearedWall.Invoke();
         }

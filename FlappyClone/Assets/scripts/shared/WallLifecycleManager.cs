@@ -99,6 +99,7 @@ namespace FlappyClone
             wallData.transform.position = new Vector2(newX, WallParent.position.y);
 
             if (spawned) {
+                Debug.Log($"Spawned new wall '{wallData.gameObject.name}' in frame {Time.frameCount}.");
                 WallSpawned?.Invoke(sender: this, new WallEventArgs { WallData = wallData });
             }
 

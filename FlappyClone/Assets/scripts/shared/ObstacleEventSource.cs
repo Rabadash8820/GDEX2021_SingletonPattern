@@ -25,12 +25,6 @@ namespace FlappyClone
             WallLifecycleManager = null;
             GroundCollisionTrigger = null;
             PlayerTag = DefaultPlayerTag;
-
-            EventPlayerClearedWall = null;
-            EventPlayerHitObstacle = null;
-
-            PlayerClearedWall = null;
-            PlayerHitObstacle = null;
         }
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]

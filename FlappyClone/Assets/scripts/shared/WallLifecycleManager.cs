@@ -81,6 +81,7 @@ namespace FlappyClone
         private WallData activateOrSpawnWall(float previousDistance)
         {
             WallData wallData;
+            bool spawned = false;
             if (_wallPool.Count > 0) {
                 wallData = _wallPool.Dequeue();
                 wallData.gameObject.SetActive(true);
@@ -88,6 +89,7 @@ namespace FlappyClone
             else {
                 wallData = Instantiate(WallPrefab, WallParent).GetComponent<WallData>();
                 wallData.name = string.Format(WallNameFormatString, _wallPool.Count + _activeWalls.Count);
+                spawned = true;
             }
 
             _activeWalls.Enqueue(wallData);
@@ -96,8 +98,9 @@ namespace FlappyClone
             float newX = previousDistance + UnityEngine.Random.Range(MinWallSpacing, MaxWallSpacing);
             wallData.transform.position = new Vector2(newX, WallParent.position.y);
 
-            if (_wallPool.Count == 0)
+            if (spawned) {
                 WallSpawned?.Invoke(sender: this, new WallEventArgs { WallData = wallData });
+            }
 
             return wallData;
         }

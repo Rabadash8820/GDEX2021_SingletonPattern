@@ -11,6 +11,7 @@ namespace FlappyClone
         public const float DefaultFillBehindDistance = 10f;
         public const float DefaultMinWallSpacing = 1f;
         public const float DefaultMaxWallSpacing = 5f;
+        public const string DefaultWallNameFormatString = "wall-{0}";
 
         private readonly Queue<WallData> _wallPool = new Queue<WallData>();
         private readonly Queue<WallData> _activeWalls = new Queue<WallData>();
@@ -20,6 +21,7 @@ namespace FlappyClone
         public GameObject WallPrefab;
         public Transform WallParent;
         public Transform FillBasis;
+        public string WallNameFormatString = DefaultWallNameFormatString;
 
         [Header("Wall Spacing")]
         [Min(1f)]
@@ -34,6 +36,7 @@ namespace FlappyClone
             WallSizer = null;
             WallPrefab = null;
             WallParent = null;
+            WallNameFormatString = DefaultWallNameFormatString;
 
             FillAheadDistance = DefaultFillAheadDistance;
             FillBehindDistance = DefaultFillBehindDistance;
@@ -82,8 +85,10 @@ namespace FlappyClone
                 wallData = _wallPool.Dequeue();
                 wallData.gameObject.SetActive(true);
             }
-            else
+            else {
                 wallData = Instantiate(WallPrefab, WallParent).GetComponent<WallData>();
+                wallData.name = string.Format(WallNameFormatString, _wallPool.Count + _activeWalls.Count);
+            }
 
             _activeWalls.Enqueue(wallData);
 

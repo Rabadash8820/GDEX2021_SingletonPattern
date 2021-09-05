@@ -10,7 +10,7 @@ namespace FlappyClone
         public ObstacleEventSource ObstacleEventSource;
 
         [Header("Singletons")]
-        public WallSpawner WallSpawner;
+        public WallLifecycleManager WallLifecycleManager;
         public WorldMover WorldMover;
         public Scorekeeper Scorekeeper;
         public HighScoreManager HighScoreManager;
@@ -53,8 +53,8 @@ namespace FlappyClone
             if (HighScoreManager != null)
                 HighScoreManager.CheckForNewHigh();
 
-            if (WallSpawner != null)
-                WallSpawner.Spawn();
+            if (WallLifecycleManager != null)
+                WallLifecycleManager.UpdateWalls();
         }
 
         private void handlePlayerHitObstacle()

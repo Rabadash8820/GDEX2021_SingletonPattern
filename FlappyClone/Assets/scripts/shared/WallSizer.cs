@@ -3,62 +3,29 @@ using UnityEngine;
 
 namespace FlappyClone
 {
-    public class WallSpawner : MonoBehaviour
+    public class WallSizer : MonoBehaviour
     {
-        public const float DefaultSpawnOffset = 0f;
-        public const float DefaultMinWallSpacing = 1f;
-        public const float DefaultMaxWallSpacing = 5f;
         public const int DefaultMinHoleHeight = 2;
         public const int DefaultMaxHoleHeight = 8;
         public const float DefaultWallColliderOffset = 0.1f;
         public const int DefaultWorldHeight = 10;
-        public const bool DefaultDeleteOldestWallOnSpawn = true;
-        public const int DefaultMaxWalls = 5;
 
-        public GameObject WallPrefab;
-        public Transform WallParent;
-        public float SpawnOffset = DefaultSpawnOffset;
-        public float MinWallSpacing = DefaultMinWallSpacing;
-        public float MaxWallSpacing = DefaultMaxWallSpacing;
         public int MinHolelHeight = DefaultMinHoleHeight;
         public int MaxHoleHeight = DefaultMaxHoleHeight;
         public float WallColliderOffset = DefaultWallColliderOffset;
         public int WorldHeight = DefaultWorldHeight;
-        public bool DeleteOldestWallOnSpawn = DefaultDeleteOldestWallOnSpawn;
-        public int MaxWalls = DefaultMaxWalls;
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Reset()
         {
-            WallPrefab = null;
-            WallParent = null;
-            SpawnOffset = DefaultSpawnOffset;
-            MinWallSpacing = DefaultMinWallSpacing;
-            MaxWallSpacing = DefaultMaxWallSpacing;
             MinHolelHeight = DefaultMinHoleHeight;
             MaxHoleHeight = DefaultMaxHoleHeight;
             WallColliderOffset = DefaultWallColliderOffset;
             WorldHeight = DefaultWorldHeight;
-            DeleteOldestWallOnSpawn = DefaultDeleteOldestWallOnSpawn;
-            MaxWalls = DefaultMaxWalls;
         }
 
-        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
-        private void Awake()
+        public void Resize(ref WallData wallData)
         {
-            this.AssertAssociation(WallPrefab, nameof(WallPrefab));
-            this.AssertAssociation(WallParent, nameof(WallParent));
-        }
-
-        public event System.EventHandler<WallEvent> OldWallDeleted;
-        public event System.EventHandler<WallEvent> NewWallSpawned;
-
-        public void Spawn()
-        {
-            Vector3 pos = new Vector2(SpawnOffset + Random.Range(MinWallSpacing, MaxWallSpacing), WallParent.position.y);
-            GameObject wallObj = Instantiate(WallPrefab, pos, Quaternion.identity, WallParent);
-            WallData wallData = wallObj.GetComponentInChildren<WallData>();
-
             int randHoleHeight = Random.Range(MinHolelHeight, MaxHoleHeight + 1);   // Random.Range max is exclusive with integer args, hence the +1s
             int randOffset = Random.Range(1, WorldHeight - randHoleHeight);         // Missing +1 here is intentional, so there is wall on either side of hole
             float offset = 2f * WallColliderOffset;
@@ -77,16 +44,6 @@ namespace FlappyClone
             wallData.BottomCollider.Collider.offset = (WorldHeight - randOffset - randHoleHeight) / 2f * Vector2.up;
             if (wallData.BottomCollider.Collider is BoxCollider2D bottomBox)
                 bottomBox.size = new Vector2(bottomBox.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
-
-            var newEvent = new WallEvent { WallData = wallData };
-            NewWallSpawned?.Invoke(sender: this, newEvent);
-
-            if (DeleteOldestWallOnSpawn && WallParent.childCount > MaxWalls) {
-                WallData oldestWallData = WallParent.GetChild(0).GetComponentInChildren<WallData>();
-                var oldEvent = new WallEvent { WallData = oldestWallData };
-                OldWallDeleted?.Invoke(sender: this, oldEvent);
-                Destroy(oldestWallData.gameObject);
-            }
         }
     }
 }

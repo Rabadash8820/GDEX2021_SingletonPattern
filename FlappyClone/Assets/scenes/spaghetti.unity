@@ -324,7 +324,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 352343364}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287928661
 GameObject:
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 287928662}
   - component: {fileID: 287928663}
   m_Layer: 0
-  m_Name: wall-spawner
+  m_Name: wall-sizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,7 +355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 352343364}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &287928663
 MonoBehaviour:
@@ -369,17 +369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2564322f7abce9846862bba56a6f4c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallPrefab: {fileID: 442230503257155071, guid: 5a35b4ff8c7bc0849a88ebc933bf9662, type: 3}
-  WallParent: {fileID: 147074270}
-  SpawnOffset: 3
-  MinWallSpacing: 5
-  MaxWallSpacing: 1
   MinHolelHeight: 3
   MaxHoleHeight: 8
   WallColliderOffset: 0.1
   WorldHeight: 10
-  DeleteOldestWallOnSpawn: 1
-  MaxWalls: 5
 --- !u!1 &352343363
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +402,7 @@ Transform:
   m_Children:
   - {fileID: 1088631568}
   - {fileID: 1213470529}
+  - {fileID: 1724719150}
   - {fileID: 287928662}
   - {fileID: 811958323}
   - {fileID: 1513412404}
@@ -446,7 +440,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 352343364}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &403119298
 MonoBehaviour:
@@ -911,7 +905,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 352343364}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &811958324
 MonoBehaviour:
@@ -925,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4625044c45db141468253a8d1e2ecf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallSpawner: {fileID: 287928663}
+  WallLifecycleManager: {fileID: 1724719151}
   GroundCollisionTrigger: {fileID: 452377778}
   PlayerTag: Player
 --- !u!1001 &949386800
@@ -1157,9 +1151,9 @@ MonoBehaviour:
   Starting:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 287928663}
-        m_TargetAssemblyTypeName: FlappyClone.WallSpawner, Assembly-CSharp
-        m_MethodName: Spawn
+      - m_Target: {fileID: 1724719151}
+        m_TargetAssemblyTypeName: FlappyClone.WallLifecycleManager, Assembly-CSharp
+        m_MethodName: UpdateWalls
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1331,6 +1325,11 @@ RectTransform:
 --- !u!50 &1386044130 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5222463752640807669, guid: cf2ae9a920927214fa267d2487bc755a, type: 3}
+  m_PrefabInstance: {fileID: 949386800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1386044133 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2349544005362329879, guid: cf2ae9a920927214fa267d2487bc755a, type: 3}
   m_PrefabInstance: {fileID: 949386800}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1446010527
@@ -1543,7 +1542,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 352343364}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1513412405
 MonoBehaviour:
@@ -1558,7 +1557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObstacleEventSource: {fileID: 811958324}
-  WallSpawner: {fileID: 287928663}
+  WallLifecycleManager: {fileID: 1724719151}
   WorldMover: {fileID: 1458671843}
   Scorekeeper: {fileID: 228899910}
   HighScoreManager: {fileID: 403119298}
@@ -1566,6 +1565,57 @@ MonoBehaviour:
   GameoverUiRoot: {fileID: 1446010527}
   PlayerParticleSystem: {fileID: 949386801}
   ClearedWallAnimationState: Base Layer.wall-clear
+--- !u!1 &1724719149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724719150}
+  - component: {fileID: 1724719151}
+  m_Layer: 0
+  m_Name: wall-lifecycle-manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724719150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724719149}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 352343364}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1724719151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724719149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234a507384183d74e8128e2179595ee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WallSizer: {fileID: 287928663}
+  WallPrefab: {fileID: 442230503257155071, guid: 5a35b4ff8c7bc0849a88ebc933bf9662, type: 3}
+  WallParent: {fileID: 147074270}
+  FillBasis: {fileID: 1386044133}
+  FillAheadDistance: 10
+  FillBehindDistance: 10
+  MinWallSpacing: 3
+  MaxWallSpacing: 6
 --- !u!1 &1822959601
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace FlappyClone
         public const float DefaultWallColliderOffset = 0.1f;
         public const int DefaultWorldHeight = 10;
 
-        public int MinHolelHeight = DefaultMinHoleHeight;
+        public int MinHoleHeight = DefaultMinHoleHeight;
         public int MaxHoleHeight = DefaultMaxHoleHeight;
         public float WallColliderOffset = DefaultWallColliderOffset;
         public int WorldHeight = DefaultWorldHeight;
@@ -18,7 +18,7 @@ namespace FlappyClone
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Reset()
         {
-            MinHolelHeight = DefaultMinHoleHeight;
+            MinHoleHeight = DefaultMinHoleHeight;
             MaxHoleHeight = DefaultMaxHoleHeight;
             WallColliderOffset = DefaultWallColliderOffset;
             WorldHeight = DefaultWorldHeight;
@@ -26,7 +26,7 @@ namespace FlappyClone
 
         public void Resize(ref WallData wallData)
         {
-            int randHoleHeight = Random.Range(MinHolelHeight, MaxHoleHeight + 1);   // Random.Range max is exclusive with integer args, hence the +1s
+            int randHoleHeight = Random.Range(MinHoleHeight, MaxHoleHeight + 1);   // Random.Range max is exclusive with integer args, hence the +1s
             int randOffset = Random.Range(1, WorldHeight - randHoleHeight);         // Missing +1 here is intentional, so there is wall on either side of hole
             float offset = 2f * WallColliderOffset;
 

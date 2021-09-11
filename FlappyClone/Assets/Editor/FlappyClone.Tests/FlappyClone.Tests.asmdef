@@ -4,7 +4,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "FlappyClone.Shared"
+        "FlappyClone.Shared",
+        "FlappyClone.Basic",
+        "FlappyClone.Singletons",
+        "FlappyClone.DependencyInjection"
     ],
     "includePlatforms": [
         "Editor"

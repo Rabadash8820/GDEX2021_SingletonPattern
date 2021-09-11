@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     public static class UnityObjectExtensions
     {

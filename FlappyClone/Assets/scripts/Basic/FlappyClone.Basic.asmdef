@@ -1,7 +1,10 @@
 {
-    "name": "FlappyClone.Shared",
+    "name": "FlappyClone.Basic",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:9553a3bcbeec5d0448136b1fdd46d653",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     public class BirdMover : MonoBehaviour
     {

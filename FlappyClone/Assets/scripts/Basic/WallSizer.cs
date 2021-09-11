@@ -1,7 +1,8 @@
+using FlappyClone.Shared;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-namespace FlappyClone
+namespace FlappyClone.Basic
 {
     public class WallSizer : MonoBehaviour
     {

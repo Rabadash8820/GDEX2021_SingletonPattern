@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     [RequireComponent(typeof(Collider2D))]
     public class CollisionTrigger2D : MonoBehaviour

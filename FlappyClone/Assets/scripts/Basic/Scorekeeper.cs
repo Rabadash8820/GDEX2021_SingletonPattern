@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using TMPro;
 using UnityEngine;
 
-namespace FlappyClone
+namespace FlappyClone.Basic
 {
     public class Scorekeeper : MonoBehaviour
     {

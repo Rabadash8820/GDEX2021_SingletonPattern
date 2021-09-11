@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     public class WallData : MonoBehaviour
     {

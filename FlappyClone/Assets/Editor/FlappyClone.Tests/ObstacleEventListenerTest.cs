@@ -1,4 +1,5 @@
-using FlappyClone;
+using FlappyClone.Shared;
+using FlappyClone.Basic;
 using NUnit.Framework;
 using UnityEngine;
 

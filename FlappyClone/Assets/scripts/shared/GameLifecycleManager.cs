@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     public class GameLifecycleManager : MonoBehaviour
     {

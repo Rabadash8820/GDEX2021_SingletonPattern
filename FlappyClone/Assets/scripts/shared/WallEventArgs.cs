@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     public class WallEventArgs : EventArgs
     {

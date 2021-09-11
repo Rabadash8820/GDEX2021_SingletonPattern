@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace FlappyClone
+namespace FlappyClone.Shared
 {
     public class ComponentLifecycleTrigger : MonoBehaviour
     {

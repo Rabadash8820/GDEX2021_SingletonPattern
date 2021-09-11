@@ -1,8 +1,9 @@
+using FlappyClone.Shared;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace FlappyClone
+namespace FlappyClone.Basic
 {
     public class HighScoreManager : MonoBehaviour
     {

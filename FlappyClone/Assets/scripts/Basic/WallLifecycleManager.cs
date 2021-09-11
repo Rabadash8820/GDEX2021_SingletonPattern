@@ -1,9 +1,10 @@
+using FlappyClone.Shared;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-namespace FlappyClone
+namespace FlappyClone.Basic
 {
     public class WallLifecycleManager : MonoBehaviour
     {

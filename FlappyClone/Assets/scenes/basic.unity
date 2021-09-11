@@ -684,6 +684,9 @@ MonoBehaviour:
   ShowNewHighEffectsFirstTime: 0
   NewHighFontSize: 40
   NewHighFontColor: {r: 0, g: 1, b: 0, a: 1}
+  NewHigh:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &452377775
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FlappyClone
 {
@@ -16,10 +17,12 @@ namespace FlappyClone
         public int CurrentHighScore;
         public Scorekeeper Scorekeeper;
         public string PlayerPrefKey = DefaultPlayerPrefKey;
+
         [Header("New high effects")]
         public bool ShowNewHighEffectsFirstTime = DefaultShowNewHighEffectsFirstTime;
         public float NewHighFontSize = DefaultNewHighFontSize;
         public Color NewHighFontColor = DefaultNewHighFontColor;
+        public UnityEvent NewHigh = new UnityEvent();
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Reset()
@@ -71,6 +74,7 @@ namespace FlappyClone
 
             Scorekeeper.ScoreTxt.fontSize = NewHighFontSize;
             Scorekeeper.ScoreTxt.color = NewHighFontColor;
+            NewHigh.Invoke();
         }
 
         public void Save()

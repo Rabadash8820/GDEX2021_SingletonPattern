@@ -7,9 +7,8 @@ namespace FlappyClone
     {
         public const string DefaultClearedWallAnimationState = "Base Layer.wall-clear";
 
-        public ObstacleEventSource ObstacleEventSource;
-
         [Header("Singletons")]
+        public ObstacleEventSource ObstacleEventSource;
         public WallLifecycleManager WallLifecycleManager;
         public WorldMover WorldMover;
         public Scorekeeper Scorekeeper;
@@ -23,6 +22,10 @@ namespace FlappyClone
         private void Reset()
         {
             ObstacleEventSource = null;
+            WallLifecycleManager = null;
+            WorldMover = null;
+            Scorekeeper = null;
+            HighScoreManager = null;
 
             PlayerParticleSystem = null;
             ClearedWallAnimationState = DefaultClearedWallAnimationState;
@@ -32,36 +35,35 @@ namespace FlappyClone
         private void Awake()
         {
             this.AssertAssociation(ObstacleEventSource, nameof(ObstacleEventSource));
+            this.AssertAssociation(WallLifecycleManager, nameof(WallLifecycleManager));
+            this.AssertAssociation(WorldMover, nameof(WorldMover));
+            this.AssertAssociation(Scorekeeper, nameof(Scorekeeper));
+            this.AssertAssociation(HighScoreManager, nameof(HighScoreManager));
 
-            ObstacleEventSource.EventPlayerClearedWall += (sender, e) => handlePlayerClearedWall(e.WallData);
+            ObstacleEventSource.EventPlayerClearedWall += (sender, e) => HandlePlayerClearedWall(e.WallData);
 
-            ObstacleEventSource.EventPlayerHitObstacle += (sender, e) => handlePlayerHitObstacle();
+            ObstacleEventSource.EventPlayerHitObstacle += (sender, e) => HandlePlayerHitObstacle();
         }
 
-        private void handlePlayerClearedWall(WallData wallData)
+        internal void HandlePlayerClearedWall(WallData wallData)
         {
             wallData.TopAnimator.Play(ClearedWallAnimationState);
             wallData.BottomAnimator.Play(ClearedWallAnimationState);
             if (PlayerParticleSystem != null)
                 PlayerParticleSystem.Play();
 
-            if (Scorekeeper != null)
-                Scorekeeper.Increment();
+            Scorekeeper.Increment();
 
-            if (HighScoreManager != null)
-                HighScoreManager.CheckForNewHigh();
+            HighScoreManager.CheckForNewHigh();
 
-            if (WallLifecycleManager != null)
-                WallLifecycleManager.UpdateWalls();
+            WallLifecycleManager.UpdateWalls();
         }
 
-        private void handlePlayerHitObstacle()
+        internal void HandlePlayerHitObstacle()
         {
-            if (WorldMover != null)
-                WorldMover.enabled = false;
+            WorldMover.enabled = false;
 
-            if (HighScoreManager != null)
-                HighScoreManager.Save();
+            HighScoreManager.Save();
         }
 
 

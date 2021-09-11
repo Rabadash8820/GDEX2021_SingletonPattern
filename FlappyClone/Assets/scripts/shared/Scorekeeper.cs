@@ -31,12 +31,6 @@ namespace FlappyClone
         }
 
         [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
-        private void Awake()
-        {
-            this.AssertAssociation(ScoreTxt, nameof(ScoreTxt));
-        }
-
-        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
         private void Start()
         {
             CurrentScore = InitialScore;
@@ -49,6 +43,10 @@ namespace FlappyClone
             updateText();
         }
 
-        private void updateText() => ScoreTxt.text = CurrentScore > MaxScore ? OverMaxString : string.Format(ScoreFormatString, CurrentScore);
+        private void updateText()
+        {
+            if (ScoreTxt != null)
+                ScoreTxt.text = CurrentScore > MaxScore ? OverMaxString : string.Format(ScoreFormatString, CurrentScore);
+        }
     }
 }

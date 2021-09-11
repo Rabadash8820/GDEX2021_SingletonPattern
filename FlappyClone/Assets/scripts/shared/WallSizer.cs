@@ -32,18 +32,20 @@ namespace FlappyClone
 
             wallData.TopSprite.transform.localPosition = (WorldHeight - randOffset) * Vector3.up;
             wallData.TopSprite.size = new Vector2(wallData.TopSprite.size.x, randOffset);
-            wallData.TopCollider.Collider.offset = randOffset / 2f * Vector2.up;
-            if (wallData.TopCollider.Collider is BoxCollider2D topBox)
+            if (wallData.TopCollider.Collider is BoxCollider2D topBox) {
+                wallData.TopCollider.Collider.offset = randOffset / 2f * Vector2.up;
                 topBox.size = new Vector2(wallData.TopSprite.size.x - offset, randOffset - offset);
+            }
 
             wallData.ClearTrigger.transform.localPosition = (WorldHeight - randOffset - randHoleHeight / 2f) * Vector3.up;
             if (wallData.ClearTrigger.Collider is BoxCollider2D clearTrigger)
                 clearTrigger.size = new Vector2(clearTrigger.size.x, randHoleHeight);
 
             wallData.BottomSprite.size = new Vector2(wallData.BottomSprite.size.x, WorldHeight - randOffset - randHoleHeight);
-            wallData.BottomCollider.Collider.offset = (WorldHeight - randOffset - randHoleHeight) / 2f * Vector2.up;
-            if (wallData.BottomCollider.Collider is BoxCollider2D bottomBox)
+            if (wallData.BottomCollider.Collider is BoxCollider2D bottomBox) {
+                wallData.BottomCollider.Collider.offset = (WorldHeight - randOffset - randHoleHeight) / 2f * Vector2.up;
                 bottomBox.size = new Vector2(wallData.BottomSprite.size.x - offset, WorldHeight - randOffset - randHoleHeight - offset);
+            }
         }
     }
 }

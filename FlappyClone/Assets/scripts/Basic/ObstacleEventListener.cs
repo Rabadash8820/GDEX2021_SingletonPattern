@@ -40,9 +40,12 @@ namespace FlappyClone.Basic
             this.AssertAssociation(WorldMover, nameof(WorldMover));
             this.AssertAssociation(Scorekeeper, nameof(Scorekeeper));
             this.AssertAssociation(HighScoreManager, nameof(HighScoreManager));
+        }
 
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
+        private void Start()
+        {
             ObstacleEventSource.EventPlayerClearedWall += (sender, e) => HandlePlayerClearedWall(e.WallData);
-
             ObstacleEventSource.EventPlayerHitObstacle += (sender, e) => HandlePlayerHitObstacle();
         }
 

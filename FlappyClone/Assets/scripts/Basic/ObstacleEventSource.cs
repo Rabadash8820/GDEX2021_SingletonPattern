@@ -33,7 +33,11 @@ namespace FlappyClone.Basic
         {
             this.AssertAssociation(WallLifecycleManager, nameof(WallLifecycleManager));
             this.AssertAssociation(GroundCollisionTrigger, nameof(GroundCollisionTrigger));
+        }
 
+        [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Unity message")]
+        private void Start()
+        {
             GroundCollisionTrigger.CollisionEnter += (sender, collision) => handlePlayerCollision(collision);
 
             WallLifecycleManager.WallSpawned += (sender, e) => {

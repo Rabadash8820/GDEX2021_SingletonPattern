@@ -6,7 +6,7 @@ namespace FlappyClone.Basic
 {
     public class Scorekeeper : MonoBehaviour
     {
-        public const string DefaultFormatString = "Score: {0:##,###}";
+        public const string DefaultFormatString = "Score: {0:##,##0}";
         public const int DefaultInitialScore = 0;
         public const int DefaultMaxScore = 99_999;
         public const string DefaultOverMaxString = "Score: 99,999+";

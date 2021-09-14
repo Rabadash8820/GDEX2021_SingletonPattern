@@ -1,5 +1,5 @@
 {
-    "name": "FlappyClone.Tests",
+    "name": "FlappyClone.Tests.EditMode",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

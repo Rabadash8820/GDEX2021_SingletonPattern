@@ -2,13 +2,19 @@
 
 ## Overview
 
-This repo contains all source code from my GDEX 2021 presentation _The Singleton Pattern: You're Doing It Wrong_. Watch the [recording]() of the talk for background.
+This repo contains all source code and assets from my GDEX 2021 presentation _The Singleton Pattern: You're Doing It Wrong_. Watch the [recording]() of the talk for background. Slides are available on [One Drive](https://1drv.ms/u/s!Apw9vDm6ePFBgbA3XsHSoJLxrDwdPw?e=m0dteb).
 
-There are three subfolders, each containing the Unity 2021.1 project for a simple _Flappy Bird_ clone.
+The Unity project is contained in the `FlappyClone/` folder. It consists of a single scene `scenes/main.unity` with several root GameObjects, the most important three being:
 
-1. `FlappyClone_Spaghetti`: an implementation of the game using basic spaghetti code, with no high-level architecture in place to manage dependencies
-2. `FlappyClone_StaticSingletons`: an implementation of the game using the static singletons anti-pattern
-3. `FlappyClone_DependencyInjection`: an implementation of the game using dependency injection
+1. `basic-singletons`
+2. `static-singletons`
+3. `di-singletons`
+
+Activating/deactivating these root objects will toggle which of the three approaches are used to handle dependencies in the script code: basic component references, static singletons, or dependency injection.
+
+The game itself is a basic _Flappy Bird_ clone:
+
+![GIF of Flappy Clone in action](https://user-images.githubusercontent.com/8388785/133547844-c4fcb5ca-6642-4934-9199-1de3305d1a5a.gif)
 
 ## License
 

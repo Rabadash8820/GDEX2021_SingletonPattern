@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repo contains all source code and assets from my GDEX 2021 presentation _The Singleton Pattern: You're Doing It Wrong_. Watch the [recording]() of the talk for background. Slides are available on [One Drive](https://1drv.ms/u/s!Apw9vDm6ePFBgbA3XsHSoJLxrDwdPw?e=m0dteb).
+This repo contains all source code and assets from my GDEX 2021 presentation _The Singleton Pattern: You're Doing It Wrong_. Watch the [recording](https://1drv.ms/v/s!Apw9vDm6ePFBgupH_BBwqff2WtzR9w?e=JXvZ4p) of the talk for background. Slides are available on [One Drive](https://1drv.ms/p/s!Apw9vDm6ePFBgdJ2ImHZWF45mAWEOg?e=3wzH34).
 
 The Unity project is contained in the `FlappyClone/` folder. It consists of a single scene `scenes/main.unity` with several root GameObjects, the most important three being:
 
